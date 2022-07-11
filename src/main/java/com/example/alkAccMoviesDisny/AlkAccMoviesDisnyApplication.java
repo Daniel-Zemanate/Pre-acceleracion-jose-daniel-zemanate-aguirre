@@ -1,13 +1,13 @@
-package com.example.acc;
+package com.example.alkAccMoviesDisny;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AccApplication {
+public class AlkAccMoviesDisnyApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AccApplication.class, args);
+		SpringApplication.run(AlkAccMoviesDisnyApplication.class, args);
 	}
 
 }
