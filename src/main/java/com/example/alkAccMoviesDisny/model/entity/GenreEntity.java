@@ -30,7 +30,7 @@ public class GenreEntity {
     @Column(name = "image")
     private String image;
 
-    @OneToMany(mappedBy = "genre")
-    @JsonIgnore
-    private Set<MovieSeriesEntity> movieSeriesList = new HashSet<>();
+//    @OneToMany(mappedBy = "genre")
+//    @JsonIgnore
+//    private Set<MovieSeriesEntity> movieSeriesList;
 }
