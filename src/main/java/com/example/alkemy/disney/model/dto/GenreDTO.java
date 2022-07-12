@@ -1,4 +1,4 @@
-package com.example.alkAccMoviesDisny.model.dto;
+package com.example.alkemy.disney.model.dto;
 
 import lombok.Getter;
 import lombok.Setter;

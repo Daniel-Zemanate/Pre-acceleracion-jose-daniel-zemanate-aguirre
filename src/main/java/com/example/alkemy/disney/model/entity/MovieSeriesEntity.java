@@ -1,4 +1,4 @@
-package com.example.alkAccMoviesDisny.model.entity;
+package com.example.alkemy.disney.model.entity;
 
 
 import lombok.*;
@@ -32,7 +32,7 @@ public class MovieSeriesEntity {
     private String title;
 
     @Column(name = "creation_date")
-    @DateTimeFormat(pattern = "yyyy/MM/dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate creationDate;
 
     @Column(name = "grade")
@@ -45,7 +45,7 @@ public class MovieSeriesEntity {
     @JoinTable(name = "movie_series_character", joinColumns = @JoinColumn(name = "movie_series_id", foreignKey = @ForeignKey(name = "fk_movie_series_id")), inverseJoinColumns = @JoinColumn(name = "character_id", foreignKey = @ForeignKey(name = "fk_character_id")))
     private Set<CharacterEntity> characters = new HashSet<>();
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "genre_id", insertable = false, updatable = false, foreignKey = @ForeignKey(name = "fk_genre_id"))
     private GenreEntity genre;
 

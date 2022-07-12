@@ -1,9 +1,9 @@
-package com.example.alkAccMoviesDisny.service.implementation;
+package com.example.alkemy.disney.service.implementation;
 
-import com.example.alkAccMoviesDisny.model.dto.GenreDTO;
-import com.example.alkAccMoviesDisny.model.mapper.GenreMapper;
-import com.example.alkAccMoviesDisny.repository.GenreRepository;
-import com.example.alkAccMoviesDisny.service.GenreServiceInterface;
+import com.example.alkemy.disney.model.dto.GenreDTO;
+import com.example.alkemy.disney.service.GenreServiceInterface;
+import com.example.alkemy.disney.model.mapper.GenreMapper;
+import com.example.alkemy.disney.repository.GenreRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

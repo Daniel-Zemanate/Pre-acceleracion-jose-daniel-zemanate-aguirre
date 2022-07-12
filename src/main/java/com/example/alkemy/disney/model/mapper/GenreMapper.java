@@ -1,7 +1,7 @@
-package com.example.alkAccMoviesDisny.model.mapper;
+package com.example.alkemy.disney.model.mapper;
 
-import com.example.alkAccMoviesDisny.model.dto.GenreDTO;
-import com.example.alkAccMoviesDisny.model.entity.GenreEntity;
+import com.example.alkemy.disney.model.dto.GenreDTO;
+import com.example.alkemy.disney.model.entity.GenreEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

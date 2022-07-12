@@ -1,7 +1,7 @@
-package com.example.alkAccMoviesDisny.controller;
+package com.example.alkemy.disney.controller;
 
-import com.example.alkAccMoviesDisny.model.dto.GenreDTO;
-import com.example.alkAccMoviesDisny.service.implementation.GenreServiceImplementation;
+import com.example.alkemy.disney.model.dto.GenreDTO;
+import com.example.alkemy.disney.service.implementation.GenreServiceImplementation;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;

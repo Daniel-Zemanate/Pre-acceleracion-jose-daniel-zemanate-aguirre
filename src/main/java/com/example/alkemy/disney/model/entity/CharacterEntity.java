@@ -1,12 +1,10 @@
-package com.example.alkAccMoviesDisny.model.entity;
+package com.example.alkemy.disney.model.entity;
 
 
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Getter
 @Setter
