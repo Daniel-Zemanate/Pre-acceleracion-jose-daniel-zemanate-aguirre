@@ -17,6 +17,6 @@ public class MovieSeriesDTO {
     private Integer grade;
 //    private Set<CharacterDTO> characters;
 //    private Set<CharacterEntity> characters = new HashSet<>();
-//    private GenreDTO genre;
-//    private Long genreId;
+    private GenreDTO genre;
+    private Long genreId;
 }

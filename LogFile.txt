@@ -1,2 +1,25 @@
 [2022-07-11 19:07:28] [INFO ] [GenreServiceImplementation:26] Executing genre creation in class: GenreServiceImplementation
 [2022-07-11 19:07:51] [INFO ] [GenreServiceImplementation:26] Executing genre creation in class: GenreServiceImplementation
+[2022-07-12 11:42:19] [ERROR] [CharacterServiceImplementation:35] Something went wrong when finding by id: 2, java.util.NoSuchElementException: No value present
+[2022-07-13 08:46:41] [ERROR] [CharacterServiceImplementation:34] Something went wrong when findCharacterById: 2 in -CharacterServiceImplementation-
+[2022-07-13 08:50:28] [ERROR] [CharacterServiceImplementation:34] Something went wrong when findCharacterById: 200 in -CharacterServiceImplementation-
+[2022-07-13 08:50:28] [ERROR] [CharacterServiceImplementation:24] NOT FOUND: java.util.NoSuchElementException
+[2022-07-13 08:53:41] [ERROR] [CharacterServiceImplementation:34] Something went wrong when findCharacterById: 200 in -CharacterServiceImplementation-
+[2022-07-13 08:53:41] [ERROR] [CharacterServiceImplementation:25] NOT FOUND: null java.util.NoSuchElementException
+[2022-07-13 08:55:19] [ERROR] [CharacterServiceImplementation:34] Something went wrong when findCharacterById: 200 in -CharacterServiceImplementation-
+[2022-07-13 08:55:19] [ERROR] [CharacterServiceImplementation:24] NOT FOUND: java.util.NoSuchElementException: Something went wrong when findCharacterById: 200 in -CharacterServiceImplementation-
+[2022-07-13 09:07:26] [ERROR] [CharacterServiceImplementation:24] Something went wrong when findCharacterById: 200 in -CharacterServiceImplementation- ->NOT FOUND, CHECK REQUEST PARAM: null
+[2022-07-13 09:08:33] [ERROR] [CharacterServiceImplementation:24] Something went wrong when findCharacterById: 4 in -CharacterServiceImplementation- ->NOT FOUND, CHECK REQUEST PARAM: [Ljava.lang.StackTraceElement;@5038dab7
+[2022-07-13 09:09:22] [ERROR] [CharacterServiceImplementation:24] Something went wrong when findCharacterById: 5 in -CharacterServiceImplementation- ->NOT FOUND, CHECK REQUEST PARAM: class java.util.NoSuchElementException
+[2022-07-13 09:16:25] [ERROR] [CharacterServiceImplementation:24] Something went wrong when findCharacterById: 5 in -CharacterServiceImplementation- ->NOT FOUND ID: 5, CHECK REQUEST PARAM: class java.util.NoSuchElementException
+[2022-07-13 09:40:42] [ERROR] [CharacterServiceImplementation:23] Something went wrong when findCharacterById: 9 in -CharacterServiceImplementation- ->NOT FOUND ID: 9, CHECK REQUEST PARAM: class com.example.alkemy.disney.exception.MyNotFoundIdException
+[2022-07-13 09:52:40] [ERROR] [CharacterServiceImplementation:23] Something went wrong when findCharacterById: 2 in -CharacterServiceImplementation- ->NOT FOUND ID: 2, CHECK REQUEST PARAM: class com.example.alkemy.disney.exception.MyNotFoundIdException
+[2022-07-13 09:54:25] [ERROR] [CharacterServiceImplementation:24] Failed to convert value of type 'java.lang.String' to required type 'java.lang.Long'; nested exception is java.lang.NumberFormatException: For input string: "a" ->NOT FOUND ID: , CHECK REQUEST PARAM: class org.springframework.web.method.annotation.MethodArgumentTypeMismatchException
+[2022-07-13 10:12:14] [ERROR] [CharacterServiceImplementation:32] Failed to convert value of type 'java.lang.String' to required type 'java.lang.Long'; nested exception is java.lang.NumberFormatException: For input string: "a" ->WRONG TYPE INPUT PARAM: class org.springframework.web.method.annotation.MethodArgumentTypeMismatchException
+[2022-07-13 15:50:20] [ERROR] [CharacterServiceImplementation:39] Something went wrong when createCharacter in -CharacterServiceImplementation- ->AUTOINCREMENT ID, NO NEEDED: class com.example.alkemy.disney.exception.MyCreationWithIdException
+[2022-07-13 15:51:43] [ERROR] [CharacterServiceImplementation:25] Something went wrong when findCharacterById: 5 in -CharacterServiceImplementation- ->NOT FOUND ID: 5, CHECK REQUEST PARAM: class com.example.alkemy.disney.exception.MyNotFoundIdException
+[2022-07-13 15:51:52] [ERROR] [CharacterServiceImplementation:25] Something went wrong when findCharacterById: 5000 in -CharacterServiceImplementation- ->NOT FOUND ID: 5000, CHECK REQUEST PARAM: class com.example.alkemy.disney.exception.MyNotFoundIdException
+[2022-07-13 15:52:29] [ERROR] [CharacterServiceImplementation:32] Failed to convert value of type 'java.lang.String' to required type 'java.lang.Long'; nested exception is java.lang.NumberFormatException: For input string: "a" ->WRONG TYPE INPUT PARAM: class org.springframework.web.method.annotation.MethodArgumentTypeMismatchException
+[2022-07-13 16:04:17] [INFO ] [GenreServiceImplementation:27] Executing genre creation in class: GenreServiceImplementation
+[2022-07-13 16:04:33] [INFO ] [GenreServiceImplementation:27] Executing genre creation in class: GenreServiceImplementation
+[2022-07-13 16:04:33] [ERROR] [CharacterServiceImplementation:39] Something went wrong when createGenre in -GenreServiceImplementation- ->AUTOINCREMENT ID, NO NEEDED: class com.example.alkemy.disney.exception.MyCreationWithIdException
