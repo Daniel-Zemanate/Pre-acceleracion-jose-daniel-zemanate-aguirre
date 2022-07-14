@@ -37,22 +37,12 @@ public class MovieSeriesMapper {
 
     public MovieSeriesEntity toMovieSeriesEntity(MovieSeriesDTO dto){
         MovieSeriesEntity movieSeriesEntity = new MovieSeriesEntity();
-        movieSeriesEntity.setImage(dto.getImage());
-        movieSeriesEntity.setTitle(dto.getTitle());
-        movieSeriesEntity.setCreationDate(dto.getCreationDate());
-        movieSeriesEntity.setGrade(dto.getGrade());
-        movieSeriesEntity.setGenreId(dto.getGenreId());
 
         return movieSeriesEntity;
     }
 
     public List<MovieSeriesEntity> toListMovieSeriesEntity(List<MovieSeriesDTO> dtoList){
         List<MovieSeriesEntity> movieSeriesEntityList = new ArrayList<>();
-
-        for (MovieSeriesDTO movieSeriesDTO : dtoList) {
-
-            movieSeriesEntityList.add(toMovieSeriesEntity(movieSeriesDTO));
-        }
 
         return movieSeriesEntityList;
     }
@@ -62,31 +52,35 @@ public class MovieSeriesMapper {
     //-------------- FROM ENTITY TO DTO --------------
     public MovieSeriesDTO toMovieSeriesDTO(MovieSeriesEntity entity, Boolean loadCharacterList){
         MovieSeriesDTO movieSeriesDTO = new MovieSeriesDTO();
-        movieSeriesDTO.setGenreId(entity.getGenreId());
+
+        movieSeriesDTO.setIdMovieSeries(entity.getIdMovieSeries());
         movieSeriesDTO.setImage(entity.getImage());
         movieSeriesDTO.setTitle(entity.getTitle());
         movieSeriesDTO.setCreationDate(entity.getCreationDate());
         movieSeriesDTO.setGrade(entity.getGrade());
-        movieSeriesDTO.setGenre(genreMapper.toGenreDTO(entity.getGenre()));
-
         if (loadCharacterList){
-
+//            movieSeriesDTO.setCharacters();
         }
+
+        movieSeriesDTO.setGenre(genreMapper.toGenreDTO(entity.getGenre()));
 
         return movieSeriesDTO;
     }
 
-    public List<MovieSeriesDTOImageTitleDate> toListMovieSeriesDTO(List<MovieSeriesEntity> entityList){
-        List<MovieSeriesDTOImageTitleDate> movieSeriesDTOList = new ArrayList<>();
-        MovieSeriesDTOImageTitleDate movieSeriesDTO = new MovieSeriesDTOImageTitleDate();
+    public List<MovieSeriesDTO> toListMovieSeriesDTO(List<MovieSeriesEntity> entityList){
+        List<MovieSeriesDTO> movieSeriesDTOList = new ArrayList<>();
 
         for (MovieSeriesEntity movieSeriesEntity : entityList) {
-            movieSeriesDTO.setImage(movieSeriesEntity.getImage());
-            movieSeriesDTO.setTitle(movieSeriesEntity.getTitle());
-            movieSeriesDTO.setCreationDate(movieSeriesEntity.getCreationDate());
 
-            movieSeriesDTOList.add(movieSeriesDTO);
+            movieSeriesDTOList.add(toMovieSeriesDTO(movieSeriesEntity, false));
         }
+
+        return movieSeriesDTOList;
+    }
+
+
+    public List<MovieSeriesDTOImageTitleDate> toListMovieSeriesDTOImageTitleDate(List<MovieSeriesEntity> entityList){
+        List<MovieSeriesDTOImageTitleDate> movieSeriesDTOList = new ArrayList<>();
 
         return movieSeriesDTOList;
     }

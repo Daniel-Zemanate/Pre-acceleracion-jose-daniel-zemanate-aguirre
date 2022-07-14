@@ -23,3 +23,9 @@
 [2022-07-13 16:04:17] [INFO ] [GenreServiceImplementation:27] Executing genre creation in class: GenreServiceImplementation
 [2022-07-13 16:04:33] [INFO ] [GenreServiceImplementation:27] Executing genre creation in class: GenreServiceImplementation
 [2022-07-13 16:04:33] [ERROR] [CharacterServiceImplementation:39] Something went wrong when createGenre in -GenreServiceImplementation- ->AUTOINCREMENT ID, NO NEEDED: class com.example.alkemy.disney.exception.MyCreationWithIdException
+[2022-07-13 17:34:02] [ERROR] [CharacterServiceImplementation:47] Something went wrong when updateCharacter in -CharacterServiceImplementation- ->NULL ID, ID IS REQUIRED: class com.example.alkemy.disney.exception.MyNoIdUpdateException
+[2022-07-13 17:34:55] [ERROR] [CharacterServiceImplementation:26] Something went wrong when findCharacterById: 5000 in -CharacterServiceImplementation- ->NOT FOUND ID: 5000, CHECK REQUEST PARAM: class com.example.alkemy.disney.exception.MyNotFoundIdException
+[2022-07-14 09:24:19] [ERROR] [CharacterServiceImplementation:26] Something went wrong when findCharacterById: 1000 in -CharacterServiceImplementation- ->NOT FOUND ID: 1000, CHECK REQUEST PARAM: class com.example.alkemy.disney.exception.MyNotFoundIdException
+[2022-07-14 10:11:47] [ERROR] [CharacterServiceImplementation:26] Something went wrong when findCharacterById: 3 in -CharacterServiceImplementation- ->NOT FOUND ID: 3, CHECK REQUEST PARAM: class com.example.alkemy.disney.exception.MyNotFoundIdException
+[2022-07-14 10:12:08] [ERROR] [CharacterServiceImplementation:40] Something went wrong when createCharacter in -CharacterServiceImplementation- ->AUTOINCREMENT ID, NO NEEDED: class com.example.alkemy.disney.exception.MyCreationWithIdException
+[2022-07-14 10:46:10] [INFO ] [GenreServiceImplementation:27] Executing genre creation in class: GenreServiceImplementation

@@ -1,6 +1,7 @@
 package com.example.alkemy.disney.controller;
 
 import com.example.alkemy.disney.exception.MyCreationWithIdException;
+import com.example.alkemy.disney.exception.MyNoIdUpdateException;
 import com.example.alkemy.disney.exception.MyNotFoundIdException;
 import com.example.alkemy.disney.service.implementation.CharacterServiceImplementation;
 import org.apache.log4j.Logger;
@@ -36,6 +37,13 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     @ExceptionHandler(value = {MyCreationWithIdException.class})
     protected ResponseEntity<Object> handleCreationWithId(RuntimeException ex, WebRequest request) {
         String bodyOfResponse = "AUTOINCREMENT ID, NO NEEDED";
+        LOGGER.error(ex.getMessage()+" ->"+bodyOfResponse+": "+ ex.getClass());
+        return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
+
+    @ExceptionHandler(value = {MyNoIdUpdateException.class})
+    protected ResponseEntity<Object> handleUpdateWithoutId(RuntimeException ex, WebRequest request) {
+        String bodyOfResponse = "NULL ID, ID IS REQUIRED";
         LOGGER.error(ex.getMessage()+" ->"+bodyOfResponse+": "+ ex.getClass());
         return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }

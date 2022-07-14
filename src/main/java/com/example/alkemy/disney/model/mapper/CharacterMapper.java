@@ -1,7 +1,6 @@
 package com.example.alkemy.disney.model.mapper;
 
 import com.example.alkemy.disney.model.dto.CharacterDTO;
-import com.example.alkemy.disney.model.dto.CharacterDTOCreateUpdate;
 import com.example.alkemy.disney.model.dto.CharacterDTOImageName;
 import com.example.alkemy.disney.model.entity.CharacterEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,6 @@ import java.util.List;
 //    private String history;
 //    private List<MovieSeriesDTO> movieSeriesDTOList;
 
-//TODO: COMPLETAR EL COMPORTAMIENTO DEL MAPEO POR PERSONAJES SEGUN EL REQUERIMIENTO
 @Component
 public class CharacterMapper {
 
@@ -32,9 +30,11 @@ public class CharacterMapper {
 //    }
 
     //-------------- FROM DTO TO ENTITY --------------
-    public CharacterEntity toCharacterEntity(CharacterDTOCreateUpdate dto){
+
+    public CharacterEntity toCharacterEntity(CharacterDTO dto){
         CharacterEntity characterEntity = new CharacterEntity();
 
+        characterEntity.setIdCharacter(dto.getIdCharacter());
         characterEntity.setImage(dto.getImage());
         characterEntity.setName(dto.getName());
         characterEntity.setAge(dto.getAge());
@@ -44,12 +44,12 @@ public class CharacterMapper {
         return characterEntity;
     }
 
-    public List<CharacterEntity> toListCharacterEntity(List<CharacterDTOCreateUpdate> dtoList){
+    public List<CharacterEntity> toListCharacterEntity(List<CharacterDTO> dtoList){
         List<CharacterEntity> characterEntityList = new ArrayList<>();
 
-        for (CharacterDTOCreateUpdate characterDTOcreateUpdate : dtoList) {
+        for (CharacterDTO characterDTO : dtoList) {
 
-            characterEntityList.add(toCharacterEntity(characterDTOcreateUpdate));
+            characterEntityList.add(toCharacterEntity(characterDTO));
         }
 
         return characterEntityList;
@@ -57,7 +57,7 @@ public class CharacterMapper {
     //-------------- FROM DTO TO ENTITY --------------
 
     //-------------- FROM ENTITY TO DTO --------------
-    public CharacterDTO toCharacterDTO(CharacterEntity entity, Boolean loadMoviesSeriesList){
+    public CharacterDTO toCharacterDTO(CharacterEntity entity, Boolean loadMovieSeriesList){
         CharacterDTO characterDTO = new CharacterDTO();
 
         characterDTO.setIdCharacter(entity.getIdCharacter());
@@ -66,25 +66,13 @@ public class CharacterMapper {
         characterDTO.setAge(entity.getAge());
         characterDTO.setWeight(entity.getWeight());
         characterDTO.setHistory(entity.getHistory());
-        if (loadMoviesSeriesList){
-//            characterDTO.setMovieSeriesDTOList(entity.getMovieSeriesList());
+        if (loadMovieSeriesList){
+
+            characterDTO.setMovieSeriesList(movieSeriesMapper.toListMovieSeriesDTO(entity.getMovieSeriesList()));
         }
 
         return characterDTO;
     }
-
-//    ----------------*** NOT NECESSARY METHOD YET ***----------------
-//    public List<CharacterDTO> toListCharacterDTO(List<CharacterEntity> entityList){
-//        List<CharacterDTO> characterDTOList = new ArrayList<>();
-//
-//        for (CharacterEntity characterEntity: entityList) {
-//
-//            characterDTOList.add(toCharacterDTO(characterEntity, false));
-//        }
-//
-//        return characterDTOList;
-//    }
-
 
     public List<CharacterDTOImageName> toListCharacterDTOImageName(List<CharacterEntity> entityList){
         List<CharacterDTOImageName> characterDTOImageNameList = new ArrayList<>();

@@ -1,7 +1,7 @@
 package com.example.alkemy.disney.controller;
 
 import com.example.alkemy.disney.model.dto.CharacterDTO;
-import com.example.alkemy.disney.model.dto.CharacterDTOCreateUpdate;
+import com.example.alkemy.disney.service.CharacterServiceInterface;
 import com.example.alkemy.disney.service.implementation.CharacterServiceImplementation;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/characters")
 public class CharacterController {
 
-    private CharacterServiceImplementation characterService;
+    private CharacterServiceInterface characterService;
 
     @Autowired
     public CharacterController(CharacterServiceImplementation characterService) {
@@ -28,9 +28,9 @@ public class CharacterController {
             @ApiResponse(code = 201, message = "Character created successfully"),
             @ApiResponse(code = 400, message = "Autoincrement ID, no needed")
     })
-    public ResponseEntity<?> createCharacter(@RequestBody CharacterDTOCreateUpdate characterDTOCreateUpdate){
+    public ResponseEntity<?> createCharacter(@RequestBody CharacterDTO characterDTO){
 
-        return new ResponseEntity<>(characterService.createCharacter(characterDTOCreateUpdate), HttpStatus.CREATED);
+        return new ResponseEntity<>(characterService.createCharacter(characterDTO), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
@@ -43,5 +43,17 @@ public class CharacterController {
     public ResponseEntity<?> readCharacterById(@PathVariable("id") Long id){
 
         return new ResponseEntity<>(characterService.readCharacterById(id), HttpStatus.OK);
+    }
+
+    @PutMapping("/update")
+    @ApiOperation("Endpoint to update characters")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Character updated successfully"),
+            @ApiResponse(code = 400, message = "Null id or ID type is not Long"),
+            @ApiResponse(code = 404, message = "Not found search param")
+    })
+    public ResponseEntity<?> updateCharacter(@RequestBody CharacterDTO characterDTO){
+
+        return new ResponseEntity<>(characterService.updateCharacter(characterDTO), HttpStatus.OK);
     }
 }
