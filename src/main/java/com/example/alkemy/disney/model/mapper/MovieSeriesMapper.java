@@ -35,11 +35,44 @@ public class MovieSeriesMapper {
 //    }
     //-------------- FROM DTO TO ENTITY --------------
 
-    public MovieSeriesEntity toMovieSeriesEntity(MovieSeriesDTO dto){
+    public MovieSeriesEntity toMovieSeriesEntity(MovieSeriesDTO dto, Boolean includeCharacters){
+//    public MovieSeriesEntity toMovieSeriesEntity(MovieSeriesDTO dto, Boolean includeCharacters, Boolean includeGenre){
         MovieSeriesEntity movieSeriesEntity = new MovieSeriesEntity();
+
+        movieSeriesEntity.setIdMovieSeries(dto.getIdMovieSeries());
+        movieSeriesEntity.setImage(dto.getImage());
+        movieSeriesEntity.setTitle(dto.getTitle());
+        movieSeriesEntity.setCreationDate(dto.getCreationDate());
+        movieSeriesEntity.setGrade(dto.getGrade());
+        if (includeCharacters){
+            movieSeriesEntity.setCharacters(characterMapper.toSetListCharacterEntity(dto.getCharacters()));
+        }
+//        if (includeGenre){
+//            movieSeriesEntity.setGenre(genreMapper.toGenreEntity(dto.getGenre()));
+//        }
+
+        movieSeriesEntity.setGenreId(dto.getGenre().getIdGenre());
 
         return movieSeriesEntity;
     }
+//    public MovieSeriesEntity toMovieSeriesEntity(MovieSeriesDTOCreateUpdate dto, Boolean includeCharacters){
+//        MovieSeriesEntity movieSeriesEntity = new MovieSeriesEntity();
+//
+//        movieSeriesEntity.setIdMovieSeries(dto.getIdMovieSeries());
+//        movieSeriesEntity.setImage(dto.getImage());
+//        movieSeriesEntity.setTitle(dto.getTitle());
+//        movieSeriesEntity.setCreationDate(dto.getCreationDate());
+//        movieSeriesEntity.setGrade(dto.getGrade());
+//
+//        if (includeCharacters){
+//
+//            movieSeriesEntity.setCharacters(characterMapper.toSetListCharacterEntity(dto.getCharacters()));
+//        }
+//
+//        movieSeriesEntity.setGenreId(dto.getGenreId());
+//
+//        return movieSeriesEntity;
+//    }
 
     public List<MovieSeriesEntity> toListMovieSeriesEntity(List<MovieSeriesDTO> dtoList){
         List<MovieSeriesEntity> movieSeriesEntityList = new ArrayList<>();
@@ -50,7 +83,7 @@ public class MovieSeriesMapper {
     //-------------- FROM DTO TO ENTITY --------------
 
     //-------------- FROM ENTITY TO DTO --------------
-    public MovieSeriesDTO toMovieSeriesDTO(MovieSeriesEntity entity, Boolean loadCharacterList){
+    public MovieSeriesDTO toMovieSeriesDTO(MovieSeriesEntity entity, Boolean loadDetails){
         MovieSeriesDTO movieSeriesDTO = new MovieSeriesDTO();
 
         movieSeriesDTO.setIdMovieSeries(entity.getIdMovieSeries());
@@ -58,11 +91,12 @@ public class MovieSeriesMapper {
         movieSeriesDTO.setTitle(entity.getTitle());
         movieSeriesDTO.setCreationDate(entity.getCreationDate());
         movieSeriesDTO.setGrade(entity.getGrade());
-        if (loadCharacterList){
-//            movieSeriesDTO.setCharacters();
+
+        if (loadDetails){
+            movieSeriesDTO.setCharacters(characterMapper.toSetListCharacterDTO(entity.getCharacters()));
+            movieSeriesDTO.setGenre(genreMapper.toGenreDTO(entity.getGenre()));
         }
 
-        movieSeriesDTO.setGenre(genreMapper.toGenreDTO(entity.getGenre()));
 
         return movieSeriesDTO;
     }
@@ -70,9 +104,11 @@ public class MovieSeriesMapper {
     public List<MovieSeriesDTO> toListMovieSeriesDTO(List<MovieSeriesEntity> entityList){
         List<MovieSeriesDTO> movieSeriesDTOList = new ArrayList<>();
 
-        for (MovieSeriesEntity movieSeriesEntity : entityList) {
+        if (entityList != null){
+            for (MovieSeriesEntity movieSeriesEntity : entityList) {
 
-            movieSeriesDTOList.add(toMovieSeriesDTO(movieSeriesEntity, false));
+                movieSeriesDTOList.add(toMovieSeriesDTO(movieSeriesEntity, false));
+            }
         }
 
         return movieSeriesDTOList;

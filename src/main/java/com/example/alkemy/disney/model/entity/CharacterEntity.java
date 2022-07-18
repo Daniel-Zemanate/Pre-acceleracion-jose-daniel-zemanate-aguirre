@@ -1,6 +1,7 @@
 package com.example.alkemy.disney.model.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -37,6 +38,7 @@ public class CharacterEntity {
     private String history;
 
     @ManyToMany(mappedBy = "characters")
+    @JsonManagedReference
     private List<MovieSeriesEntity> movieSeriesList;
 //
 //    private Set<CharacterMovieSeriesEntity> characterMovieSeries = new HashSet<>();

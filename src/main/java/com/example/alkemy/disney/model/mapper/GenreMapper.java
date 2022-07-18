@@ -29,9 +29,12 @@ public class GenreMapper {
     //-------------- FROM ENTITY TO DTO --------------
     public GenreDTO toGenreDTO(GenreEntity entity){
         GenreDTO genreDTO = new GenreDTO();
-        genreDTO.setIdGenre(entity.getIdGenre());
-        genreDTO.setName(entity.getName());
-        genreDTO.setImage(entity.getImage());
+        if (entity != null){
+            genreDTO.setIdGenre(entity.getIdGenre());
+            genreDTO.setName(entity.getName());
+            genreDTO.setImage(entity.getImage());
+        }
+
         return genreDTO;
     }
 

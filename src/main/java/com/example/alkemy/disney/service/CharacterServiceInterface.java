@@ -7,4 +7,5 @@ public interface CharacterServiceInterface {
     CharacterDTO createCharacter(CharacterDTO characterDTO);
     CharacterDTO readCharacterById(Long id);
     CharacterDTO updateCharacter(CharacterDTO characterDTO);
+    CharacterDTO deleteCharacterById(Long id);
 }

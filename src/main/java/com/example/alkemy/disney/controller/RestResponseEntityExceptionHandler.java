@@ -1,8 +1,6 @@
 package com.example.alkemy.disney.controller;
 
-import com.example.alkemy.disney.exception.MyCreationWithIdException;
-import com.example.alkemy.disney.exception.MyNoIdUpdateException;
-import com.example.alkemy.disney.exception.MyNotFoundIdException;
+import com.example.alkemy.disney.exception.*;
 import com.example.alkemy.disney.service.implementation.CharacterServiceImplementation;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpHeaders;
@@ -44,6 +42,29 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     @ExceptionHandler(value = {MyNoIdUpdateException.class})
     protected ResponseEntity<Object> handleUpdateWithoutId(RuntimeException ex, WebRequest request) {
         String bodyOfResponse = "NULL ID, ID IS REQUIRED";
+        LOGGER.error(ex.getMessage()+" ->"+bodyOfResponse+": "+ ex.getClass());
+        return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
+
+    @ExceptionHandler(value = {MyNoIdGenreException.class})
+    protected ResponseEntity<Object> handleNoIdGenreEntity(RuntimeException ex, WebRequest request) {
+        String bodyOfResponse = "NULL GENRE ID, ID IS REQUIRED";
+        LOGGER.error(ex.getMessage()+" ->"+bodyOfResponse+": "+ ex.getClass());
+        return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
+
+
+    @ExceptionHandler(value = {MyNotFoundGenreEntityException.class})
+    protected ResponseEntity<Object> handleNotFoundGenreEntity(RuntimeException ex, WebRequest request) {
+        String bodyOfResponse = "GENRE ID NOT FOUND: "+ex.getMessage().replaceAll("[^0-9]", "")+", CHECK REQUEST PARAM";
+        LOGGER.error(ex.getMessage()+" ->"+bodyOfResponse+": "+ ex.getClass());
+        return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
+
+
+    @ExceptionHandler(value = {MyNoNeedCharactersException.class})
+    protected ResponseEntity<Object> handleListOfCharactersWhenCreatingMovie(RuntimeException ex, WebRequest request) {
+        String bodyOfResponse = "THIS ENDPOINT CAN NOT UPDATE CHARACTERS";
         LOGGER.error(ex.getMessage()+" ->"+bodyOfResponse+": "+ ex.getClass());
         return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }

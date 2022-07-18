@@ -33,12 +33,12 @@ public class CharacterController {
         return new ResponseEntity<>(characterService.createCharacter(characterDTO), HttpStatus.CREATED);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/read/{id}")
     @ApiOperation("Endpoint to request for specific character details")
     @ApiResponses({
             @ApiResponse(code = 200, message = "Character read successfully"),
             @ApiResponse(code = 400, message = "Wrong request params"),
-            @ApiResponse(code = 404, message = "Not found search param")
+            @ApiResponse(code = 404, message = "Search parameter Not found")
     })
     public ResponseEntity<?> readCharacterById(@PathVariable("id") Long id){
 
@@ -50,10 +50,22 @@ public class CharacterController {
     @ApiResponses({
             @ApiResponse(code = 200, message = "Character updated successfully"),
             @ApiResponse(code = 400, message = "Null id or ID type is not Long"),
-            @ApiResponse(code = 404, message = "Not found search param")
+            @ApiResponse(code = 404, message = "Search parameter Not found")
     })
     public ResponseEntity<?> updateCharacter(@RequestBody CharacterDTO characterDTO){
 
         return new ResponseEntity<>(characterService.updateCharacter(characterDTO), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    @ApiOperation("Endpoint to delete a specific character")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Character deleted successfully"),
+            @ApiResponse(code = 400, message = "Wrong request params"),
+            @ApiResponse(code = 404, message = "Search parameter Not found")
+    })
+    public ResponseEntity<?> deleteCharacter(@PathVariable("id") Long id){
+
+        return new ResponseEntity<>(characterService.deleteCharacterById(id), HttpStatus.OK);
     }
 }

@@ -29,13 +29,11 @@ public class CharacterServiceImplementation implements CharacterServiceInterface
     public CharacterDTO createCharacter(CharacterDTO characterDTO) {
         //VALIDATION: AUTOINCREMENT ID. NO NEEDED.
         if (characterDTO.getIdCharacter() != null){
+
             throw new MyCreationWithIdException("Something went wrong when createCharacter in -CharacterServiceImplementation-");
         }
 
-        /**TODO: CONSULTAR PORQUÉ GENERA UN NullPointerException CUANDO PONGO QUE RETORNE LA LISTA DE PELICULAS AL CREAR UN NUEVO PERSONAJE,
-         * DEBERIA TRAER UNA LISTA VACIA, PERO NO LO HACE. EN EL MOMENTO LO DEJO QUE RETORNE UN NULL CUANDO LO CREA, PORQUE LUEGO CUANDO CONSULTO
-         * ESE MISMO ID, SI LOGRA TRAER LA LISTA VACIA!!*/
-        CharacterDTO responseCharacterDTO = characterMapper.toCharacterDTO(characterRepository.save(characterMapper.toCharacterEntity(characterDTO)), false);
+        CharacterDTO responseCharacterDTO = characterMapper.toCharacterDTO(characterRepository.save(characterMapper.toCharacterEntity(characterDTO)), true);
 
         return responseCharacterDTO;
     }
@@ -46,7 +44,8 @@ public class CharacterServiceImplementation implements CharacterServiceInterface
         CharacterDTO responseCharacterDTO = new CharacterDTO();
 
         if (!entityCheck.isPresent()){
-            throw new MyNotFoundIdException("Something went wrong when findCharacterById: "+id+" in -CharacterServiceImplementation-");
+
+            throw new MyNotFoundIdException("Something went wrong when readCharacterById: "+id+" in -CharacterServiceImplementation-");
         }
 
         responseCharacterDTO = characterMapper.toCharacterDTO(entityCheck.get(),true);
@@ -64,7 +63,16 @@ public class CharacterServiceImplementation implements CharacterServiceInterface
         //VALIDATION: ID EXISTS.
         readCharacterById(characterDTO.getIdCharacter());
 
-        //TODO: CONSULTAR LO MISMO QUE CUANDO SE CREA UN REGISTRO
-        return characterMapper.toCharacterDTO(characterRepository.save(characterMapper.toCharacterEntity(characterDTO)), false);
+        return characterMapper.toCharacterDTO(characterRepository.save(characterMapper.toCharacterEntity(characterDTO)), true);
+    }
+
+    @Override
+    public CharacterDTO deleteCharacterById(Long id) {
+        //ID VALIDATION
+        CharacterDTO responseCharacterDTO = readCharacterById(id);
+
+        characterRepository.deleteById(id);
+
+        return responseCharacterDTO;
     }
 }

@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 //    private Long idCharacter;
@@ -44,15 +46,17 @@ public class CharacterMapper {
         return characterEntity;
     }
 
-    public List<CharacterEntity> toListCharacterEntity(List<CharacterDTO> dtoList){
-        List<CharacterEntity> characterEntityList = new ArrayList<>();
+    public Set<CharacterEntity> toSetListCharacterEntity(Set<CharacterDTO> dtoList){
+        Set<CharacterEntity> characterEntitySetList = new HashSet<>();
 
-        for (CharacterDTO characterDTO : dtoList) {
+        if (dtoList != null){
+            for (CharacterDTO characterDTO : dtoList) {
 
-            characterEntityList.add(toCharacterEntity(characterDTO));
+                characterEntitySetList.add(toCharacterEntity(characterDTO));
+            }
         }
 
-        return characterEntityList;
+        return characterEntitySetList;
     }
     //-------------- FROM DTO TO ENTITY --------------
 
@@ -73,6 +77,21 @@ public class CharacterMapper {
 
         return characterDTO;
     }
+
+
+    public Set<CharacterDTO> toSetListCharacterDTO(Set<CharacterEntity> entityList){
+        Set<CharacterDTO> characterDTOSetList = new HashSet<>();
+
+        if (entityList != null){
+            for (CharacterEntity characterEntity: entityList) {
+
+                characterDTOSetList.add(toCharacterDTO(characterEntity,false));
+            }
+        }
+
+        return characterDTOSetList;
+    }
+
 
     public List<CharacterDTOImageName> toListCharacterDTOImageName(List<CharacterEntity> entityList){
         List<CharacterDTOImageName> characterDTOImageNameList = new ArrayList<>();

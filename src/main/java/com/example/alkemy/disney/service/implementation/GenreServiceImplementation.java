@@ -1,13 +1,16 @@
 package com.example.alkemy.disney.service.implementation;
 
-import com.example.alkemy.disney.exception.MyCreationWithIdException;
+import com.example.alkemy.disney.exception.*;
 import com.example.alkemy.disney.model.dto.GenreDTO;
+import com.example.alkemy.disney.model.entity.GenreEntity;
 import com.example.alkemy.disney.service.GenreServiceInterface;
 import com.example.alkemy.disney.model.mapper.GenreMapper;
 import com.example.alkemy.disney.repository.GenreRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class GenreServiceImplementation implements GenreServiceInterface {
@@ -33,4 +36,30 @@ public class GenreServiceImplementation implements GenreServiceInterface {
 
         return genreMapper.toGenreDTO(genreRepository.save(genreMapper.toGenreEntity(genreDTO)));
     }
+
+    @Override
+    public GenreDTO readGenreById(Long id) {
+        GenreDTO genreDTO = genreMapper.toGenreDTO(readGenreEntityById(id));
+
+        return genreDTO;
+    }
+
+    @Override
+    public GenreEntity readGenreEntityById(Long id) {
+        if (id == null){
+
+            throw new MyNoIdGenreException("Something went wrong when readGenreEntityById in -GenreServiceImplementation-");
+        }
+
+        Optional<GenreEntity> genreEntity = genreRepository.findById(id);
+
+        if (!genreEntity.isPresent()){
+
+            throw new MyNotFoundGenreEntityException("Something went wrong when readGenreEntityById: "+id+" in -GenreServiceImplementation-");
+        }
+
+        return genreEntity.get();
+    }
+
+
 }
