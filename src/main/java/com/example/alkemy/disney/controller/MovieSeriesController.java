@@ -70,9 +70,28 @@ public class MovieSeriesController {
 
 
     @PostMapping("/{idMovie}/characters/{idCharacter}")
+    @ApiOperation("Endpoint to Add one character to a movie/series")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Character successfully added to Movie/Series"),
+            @ApiResponse(code = 400, message = "Wrong request params"),
+            @ApiResponse(code = 404, message = "Search parameters Not found")
+    })
     public ResponseEntity<?> addCharacterToMovieSeries(@PathVariable("idMovie") Long idMovie, @PathVariable("idCharacter") Long idCharacter){
 
         return new ResponseEntity<>(movieSeriesService.addCharacterToMovieSeries(idMovie, idCharacter), HttpStatus.OK);
+    }
+
+
+    @DeleteMapping("/{idMovie}/characters/{idCharacter}")
+    @ApiOperation("Endpoint to Remove one character from a movie/series")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Character successfully removed from Movie/Series"),
+            @ApiResponse(code = 400, message = "Wrong request params"),
+            @ApiResponse(code = 404, message = "Search parameters Not found")
+    })
+    public ResponseEntity<?> removeCharacterFromMovieSeries(@PathVariable("idMovie") Long idMovie, @PathVariable("idCharacter") Long idCharacter){
+
+        return new ResponseEntity<>(movieSeriesService.removeCharacterToMovieSeries(idMovie, idCharacter), HttpStatus.OK);
     }
 
 }

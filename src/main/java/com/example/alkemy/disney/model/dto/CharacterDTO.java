@@ -1,12 +1,16 @@
 package com.example.alkemy.disney.model.dto;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.util.List;
 
 @Getter
 @Setter
+@EqualsAndHashCode
+@ToString
 public class CharacterDTO {
     private Long idCharacter;
     private String image;

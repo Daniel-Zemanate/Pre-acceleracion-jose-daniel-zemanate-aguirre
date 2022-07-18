@@ -11,4 +11,6 @@ public interface MovieSeriesServiceInterface {
     MovieSeriesDTO deleteMovieSeries(Long id);
 
     MovieSeriesDTO addCharacterToMovieSeries(Long idMovie, Long idCharacter);
+
+    MovieSeriesDTO removeCharacterToMovieSeries(Long idMovie, Long idCharacter);
 }

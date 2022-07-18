@@ -139,11 +139,41 @@ public class MovieSeriesServiceImplementation implements MovieSeriesServiceInter
     @Override
     public MovieSeriesDTO addCharacterToMovieSeries(Long idMovie, Long idCharacter) {
         MovieSeriesDTO responseMovieSeriesDTO = readMovieSeriesById(idMovie);
-        responseMovieSeriesDTO.setGenreId(responseMovieSeriesDTO.getGenre().getIdGenre());
         CharacterDTO characterDTO = characterService.readCharacterById(idCharacter);
 
-        if (!responseMovieSeriesDTO.getCharacters().contains(characterDTO)){
+        boolean contains = false;
+        for (CharacterDTO characterDTOCheck : responseMovieSeriesDTO.getCharacters()) {
+            if (characterDTO.getIdCharacter() == characterDTOCheck.getIdCharacter()){
+
+                contains = true;
+            }
+        }
+
+        if (!contains){
+            responseMovieSeriesDTO.setGenreId(responseMovieSeriesDTO.getGenre().getIdGenre());
             responseMovieSeriesDTO.getCharacters().add(characterDTO);
+            responseMovieSeriesDTO = createMovieSeries(responseMovieSeriesDTO, true);
+        }
+
+        return responseMovieSeriesDTO;
+    }
+
+    @Override
+    public MovieSeriesDTO removeCharacterToMovieSeries(Long idMovie, Long idCharacter) {
+        MovieSeriesDTO responseMovieSeriesDTO = readMovieSeriesById(idMovie);
+        CharacterDTO characterDTO = characterService.readCharacterById(idCharacter);
+
+        boolean contains = false;
+        for (CharacterDTO characterDTOCheck : responseMovieSeriesDTO.getCharacters()) {
+            if (characterDTO.getIdCharacter() == characterDTOCheck.getIdCharacter()){
+                characterDTO = characterDTOCheck;
+                contains = true;
+            }
+        }
+
+        if (contains){
+            responseMovieSeriesDTO.setGenreId(responseMovieSeriesDTO.getGenre().getIdGenre());
+            responseMovieSeriesDTO.getCharacters().remove(characterDTO);
             responseMovieSeriesDTO = createMovieSeries(responseMovieSeriesDTO, true);
         }
 
