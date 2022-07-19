@@ -11,6 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Set;
+
 @RestController
 @RequestMapping("/characters")
 public class CharacterController {
@@ -68,4 +71,15 @@ public class CharacterController {
 
         return new ResponseEntity<>(characterService.deleteCharacterById(id), HttpStatus.OK);
     }
+
+    @GetMapping
+    public ResponseEntity<?> readCharactersWithFilters(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) Integer age,
+            @RequestParam(required = false) Set<Long> moviesSeries,
+            @RequestParam(required = false, defaultValue = "ASC") String order){
+
+        return new ResponseEntity<>(characterService.readCharactersWithFilters(name, age, moviesSeries, order), HttpStatus.OK);
+    }
+
 }

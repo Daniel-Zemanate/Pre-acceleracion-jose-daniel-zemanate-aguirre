@@ -9,8 +9,6 @@ import java.util.List;
 
 @Getter
 @Setter
-@EqualsAndHashCode
-@ToString
 public class CharacterDTO {
     private Long idCharacter;
     private String image;

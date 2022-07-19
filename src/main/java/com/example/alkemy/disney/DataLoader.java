@@ -45,13 +45,20 @@ public class DataLoader implements ApplicationRunner {
         characterEntity.setWeight(1);
         characterEntity.setHistory("history1");
         characterRepository.save(characterEntity);
-
         CharacterEntity characterEntity2 = new CharacterEntity();
         characterEntity2.setImage("image2");
         characterEntity2.setName("name2");
         characterEntity2.setAge(2);
         characterEntity2.setWeight(2);
         characterEntity2.setHistory("history2");
+        characterRepository.save(characterEntity2);
+        CharacterEntity characterEntity3 = new CharacterEntity();
+        characterEntity3.setImage("image3");
+        characterEntity3.setName("name3");
+        characterEntity3.setAge(3);
+        characterEntity3.setWeight(3);
+        characterEntity3.setHistory("history3");
+        characterRepository.save(characterEntity3);
 
         MovieSeriesEntity movieSeriesEntity = new MovieSeriesEntity();
         Set<CharacterEntity> characterEntitySet = new HashSet<>();

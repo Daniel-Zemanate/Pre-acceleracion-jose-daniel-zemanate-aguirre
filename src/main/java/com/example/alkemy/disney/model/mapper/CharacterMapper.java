@@ -95,9 +95,10 @@ public class CharacterMapper {
 
     public List<CharacterDTOImageName> toListCharacterDTOImageName(List<CharacterEntity> entityList){
         List<CharacterDTOImageName> characterDTOImageNameList = new ArrayList<>();
-        CharacterDTOImageName characterDTOImageName = new CharacterDTOImageName();
+//        CharacterDTOImageName characterDTOImageName = new CharacterDTOImageName();
 
         for (CharacterEntity characterEntity: entityList) {
+            CharacterDTOImageName characterDTOImageName = new CharacterDTOImageName();
             characterDTOImageName.setImage(characterEntity.getImage());
             characterDTOImageName.setName(characterEntity.getName());
 
