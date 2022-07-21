@@ -25,7 +25,7 @@ public class GenreController {
         this.genreService = genreService;
     }
 
-    @PostMapping("/create")
+    @PostMapping()
     @ApiOperation("Endpoint to create new genres")
     @ApiResponses({
             @ApiResponse(code = 201, message = "Genre created successfully"),

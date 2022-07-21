@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Set;
 
@@ -25,7 +26,7 @@ public class CharacterController {
         this.characterService = characterService;
     }
 
-    @PostMapping("/create")
+    @PostMapping()
     @ApiOperation("Endpoint to create new characters")
     @ApiResponses({
             @ApiResponse(code = 201, message = "Character created successfully"),
@@ -36,7 +37,7 @@ public class CharacterController {
         return new ResponseEntity<>(characterService.createCharacter(characterDTO), HttpStatus.CREATED);
     }
 
-    @GetMapping("/read/{id}")
+    @GetMapping("/{id}")
     @ApiOperation("Endpoint to request for specific character details")
     @ApiResponses({
             @ApiResponse(code = 200, message = "Character read successfully"),
@@ -48,7 +49,7 @@ public class CharacterController {
         return new ResponseEntity<>(characterService.readCharacterById(id), HttpStatus.OK);
     }
 
-    @PutMapping("/update")
+    @PutMapping()
     @ApiOperation("Endpoint to update characters")
     @ApiResponses({
             @ApiResponse(code = 200, message = "Character updated successfully"),
@@ -60,7 +61,7 @@ public class CharacterController {
         return new ResponseEntity<>(characterService.updateCharacter(characterDTO), HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     @ApiOperation("Endpoint to delete a specific character")
     @ApiResponses({
             @ApiResponse(code = 200, message = "Character deleted successfully"),
@@ -73,6 +74,10 @@ public class CharacterController {
     }
 
     @GetMapping
+    @ApiOperation("Endpoint to request a list of characters with image and name properties. Filters like name, age, weight and movies participation could be applied")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "List of characters read successfully")
+    })
     public ResponseEntity<?> readCharactersWithFilters(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) Integer age,

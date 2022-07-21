@@ -20,7 +20,6 @@ import java.util.List;
 ////    private GenreDTO genre;
 ////    private Long genreId;
 
-//TODO: COMPLETAR EL COMPORTAMIENTO DEL MAPEO PARA PELICULAS/SERIES SEGUN EL REQUERIMIENTO
 @Component
 public class MovieSeriesMapper {
     @Autowired

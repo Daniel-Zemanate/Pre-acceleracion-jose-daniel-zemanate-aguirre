@@ -12,6 +12,11 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+/**TODO: VALIDAR COMO INTEGRAR EL USO DE @VALID CON LAS EXCEPCIONES
+ * PORQUE NO ENCUENTRO UNA FORMA OPTIMA DE INCLUIR LAS RESTICCIONES DENTRO DE LA CLASE
+ * Y QUE AUN SE SIGAN EVALUANDO VARIAS POSIBILIDADAES QUE SI SE VALIDAN EN CADA IMPLEMENTACION*/
+
+//TODO: REFACTORIZAR LAS EXCEPCIONES PARA REDUCIR LA CANTIDAD DE EXCEPCIONES CREADAS Y HACER UNA GENERICA, VARIAS SON MUY SIMILARES
 @ControllerAdvice
 public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 

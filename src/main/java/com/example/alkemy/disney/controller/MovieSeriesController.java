@@ -21,7 +21,7 @@ public class MovieSeriesController {
         this.movieSeriesService = movieSeriesService;
     }
 
-    @PostMapping("/create")
+    @PostMapping()
     @ApiOperation("Endpoint to create new movies/series")
     @ApiResponses({
             @ApiResponse(code = 201, message = "Movie/Series created successfully"),
@@ -33,7 +33,7 @@ public class MovieSeriesController {
         return new ResponseEntity<>(movieSeriesService.createMovieSeries(movieSeriesDTO, false), HttpStatus.CREATED);
     }
 
-    @GetMapping("/read/{id}")
+    @GetMapping("/{id}")
     @ApiOperation("Endpoint to request for specific movie/serie details")
     @ApiResponses({
             @ApiResponse(code = 200, message = "Character read successfully"),
@@ -44,7 +44,7 @@ public class MovieSeriesController {
 
         return new ResponseEntity<>(movieSeriesService.readMovieSeriesById(id), HttpStatus.OK);
     }
-    @PutMapping("/update")
+    @PutMapping()
     @ApiOperation("Endpoint to update movies/series")
     @ApiResponses({
             @ApiResponse(code = 200, message = "Movie/Series updated successfully"),
@@ -56,7 +56,7 @@ public class MovieSeriesController {
         return new ResponseEntity<>(movieSeriesService.updateMovieSeries(movieSeriesDTO), HttpStatus.OK);
     }
 
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/{id}")
     @ApiOperation("Endpoint to delete a specific movie/series")
     @ApiResponses({
         @ApiResponse(code = 200, message = "Movie/Series deleted successfully"),
@@ -96,6 +96,10 @@ public class MovieSeriesController {
 
 
     @GetMapping
+    @ApiOperation("Endpoint to request a list of movies with image, title and date properties. Filters like name, genre and order could be applied")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "List of movies read successfully")
+    })
     public ResponseEntity<?> readMoviesSeriesWithFilters(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) Long genreId,
