@@ -76,10 +76,10 @@ public class CharacterController {
     public ResponseEntity<?> readCharactersWithFilters(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) Integer age,
-            @RequestParam(required = false) Set<Long> moviesSeries,
-            @RequestParam(required = false, defaultValue = "ASC") String order){
+            @RequestParam(required = false) Integer weight,
+            @RequestParam(required = false) Set<Long> moviesSeries){
 
-        return new ResponseEntity<>(characterService.readCharactersWithFilters(name, age, moviesSeries, order), HttpStatus.OK);
+        return new ResponseEntity<>(characterService.readCharactersWithFilters(name, age, weight, moviesSeries), HttpStatus.OK);
     }
 
 }

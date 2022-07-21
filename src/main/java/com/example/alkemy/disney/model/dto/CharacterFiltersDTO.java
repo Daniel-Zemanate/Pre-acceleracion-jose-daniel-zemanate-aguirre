@@ -14,15 +14,16 @@ import java.util.Set;
 public class CharacterFiltersDTO {
     private String name;
     private Integer age;
+    private Integer weight;
     private Set<Long> moviesSeries;
-    private String order;
-
-
-    public Boolean isASC(){
-        return  order.compareToIgnoreCase("ASC") == 0;
-    }
-
-    public Boolean isDESC(){
-        return  order.compareToIgnoreCase("DESC") == 0;
-    }
+//    private String order;
+//
+//
+//    public Boolean isASC(){
+//        return  order.compareToIgnoreCase("ASC") == 0;
+//    }
+//
+//    public Boolean isDESC(){
+//        return  order.compareToIgnoreCase("DESC") == 0;
+//    }
 }

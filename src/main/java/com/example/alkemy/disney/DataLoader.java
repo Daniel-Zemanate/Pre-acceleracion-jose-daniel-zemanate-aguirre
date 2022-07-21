@@ -61,8 +61,8 @@ public class DataLoader implements ApplicationRunner {
         characterRepository.save(characterEntity3);
 
         MovieSeriesEntity movieSeriesEntity = new MovieSeriesEntity();
-        Set<CharacterEntity> characterEntitySet = new HashSet<>();
-        characterEntitySet.add(characterEntity2);
+//        Set<CharacterEntity> characterEntitySet = new HashSet<>();
+//        characterEntitySet.add(characterEntity2);
 
         movieSeriesEntity.setImage("image1");
         movieSeriesEntity.setTitle("title1");
@@ -71,5 +71,15 @@ public class DataLoader implements ApplicationRunner {
 //        movieSeriesEntity.setCharacters(characterEntitySet);
         movieSeriesEntity.setGenreId(1L);
         movieSeriesRepository.save(movieSeriesEntity);
+
+        MovieSeriesEntity movieSeriesEntity2 = new MovieSeriesEntity();
+
+        movieSeriesEntity2.setImage("image2");
+        movieSeriesEntity2.setTitle("title2");
+        movieSeriesEntity2.setCreationDate(LocalDate.now());
+        movieSeriesEntity2.setGrade(2);
+//        movieSeriesEntity2.setCharacters(characterEntitySet);
+        movieSeriesEntity2.setGenreId(1L);
+        movieSeriesRepository.save(movieSeriesEntity2);
     }
 }

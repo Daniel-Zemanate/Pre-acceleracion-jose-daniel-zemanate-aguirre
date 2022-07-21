@@ -94,4 +94,13 @@ public class MovieSeriesController {
         return new ResponseEntity<>(movieSeriesService.removeCharacterToMovieSeries(idMovie, idCharacter), HttpStatus.OK);
     }
 
+
+    @GetMapping
+    public ResponseEntity<?> readMoviesSeriesWithFilters(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) Long genreId,
+            @RequestParam(required = false, defaultValue = "ASC") String order){
+
+        return new ResponseEntity<>(movieSeriesService.readMoviesSeriesWithFilters(name, genreId, order), HttpStatus.OK);
+    }
 }

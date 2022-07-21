@@ -38,6 +38,13 @@ public class CharacterSpecification {
                 );
             }
 
+            if (characterFiltersDTO.getWeight() != null && characterFiltersDTO.getWeight()>=0){
+
+                predicates.add(
+                        criteriaBuilder.equal(root.get("weight"), characterFiltersDTO.getWeight())
+                );
+            }
+
             if (!CollectionUtils.isEmpty(characterFiltersDTO.getMoviesSeries())){
                 Join<MovieSeriesEntity, CharacterEntity> join = root.join("movieSeriesList", JoinType.INNER);
                 Expression<String> charactersId = join.get("idCharacter");
@@ -46,18 +53,14 @@ public class CharacterSpecification {
 
             query.distinct(true);
 
-
-            String orderByField = "name";
-            query.orderBy(
-                    characterFiltersDTO.isASC() ? criteriaBuilder.asc(root.get(orderByField)) :
-                            criteriaBuilder.desc(root.get(orderByField))
-            );
+//
+//            String orderByField = "name";
+//            query.orderBy(
+//                    characterFiltersDTO.isASC() ? criteriaBuilder.asc(root.get(orderByField)) :
+//                            criteriaBuilder.desc(root.get(orderByField))
+//            );
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
-
-
-
-
         });
     }
 }

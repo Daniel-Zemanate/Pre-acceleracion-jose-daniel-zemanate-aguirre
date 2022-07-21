@@ -85,17 +85,9 @@ public class CharacterServiceImplementation implements CharacterServiceInterface
     }
 
     @Override
-    public List<CharacterDTOImageName> readCharactersWithFilters(String name, Integer age, Set<Long> moviesSeries, String order) {
-        CharacterFiltersDTO characterFilters = new CharacterFiltersDTO(name, age, moviesSeries, order);
-        List<CharacterEntity> entities = new ArrayList<>();
-
-        if (name != null || age != null || moviesSeries != null){
-
-            entities = characterRepository.findAll(characterSpecification.readByFilters(characterFilters));
-        }else {
-
-            entities = characterRepository.findAll();
-        }
+    public List<CharacterDTOImageName> readCharactersWithFilters(String name, Integer age, Integer weight,  Set<Long> moviesSeries) {
+        CharacterFiltersDTO characterFilters = new CharacterFiltersDTO(name, age, weight, moviesSeries);
+        List<CharacterEntity> entities = characterRepository.findAll(characterSpecification.readByFilters(characterFilters));
 
         return characterMapper.toListCharacterDTOImageName(entities);
     }

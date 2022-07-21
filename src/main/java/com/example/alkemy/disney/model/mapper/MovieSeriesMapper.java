@@ -118,6 +118,16 @@ public class MovieSeriesMapper {
     public List<MovieSeriesDTOImageTitleDate> toListMovieSeriesDTOImageTitleDate(List<MovieSeriesEntity> entityList){
         List<MovieSeriesDTOImageTitleDate> movieSeriesDTOList = new ArrayList<>();
 
+        for (MovieSeriesEntity movieSeriesEntity: entityList) {
+            MovieSeriesDTOImageTitleDate movieSeriesDTOImageTitleDate = new MovieSeriesDTOImageTitleDate();
+
+            movieSeriesDTOImageTitleDate.setImage(movieSeriesEntity.getImage());
+            movieSeriesDTOImageTitleDate.setTitle(movieSeriesEntity.getTitle());
+            movieSeriesDTOImageTitleDate.setCreationDate(movieSeriesEntity.getCreationDate());
+
+            movieSeriesDTOList.add(movieSeriesDTOImageTitleDate);
+        }
+
         return movieSeriesDTOList;
     }
 

@@ -6,20 +6,22 @@ import com.example.alkemy.disney.exception.MyNoNeedCharactersException;
 import com.example.alkemy.disney.exception.MyNotFoundIdException;
 import com.example.alkemy.disney.model.dto.CharacterDTO;
 import com.example.alkemy.disney.model.dto.MovieSeriesDTO;
+import com.example.alkemy.disney.model.dto.MovieSeriesDTOImageTitleDate;
+import com.example.alkemy.disney.model.dto.MovieSeriesFiltersDTO;
 import com.example.alkemy.disney.model.entity.CharacterEntity;
 import com.example.alkemy.disney.model.entity.GenreEntity;
 import com.example.alkemy.disney.model.entity.MovieSeriesEntity;
 import com.example.alkemy.disney.model.mapper.CharacterMapper;
 import com.example.alkemy.disney.model.mapper.MovieSeriesMapper;
 import com.example.alkemy.disney.repository.MovieSeriesRepository;
+import com.example.alkemy.disney.repository.specification.MovieSeriesSpecification;
 import com.example.alkemy.disney.service.CharacterServiceInterface;
 import com.example.alkemy.disney.service.GenreServiceInterface;
 import com.example.alkemy.disney.service.MovieSeriesServiceInterface;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class MovieSeriesServiceImplementation implements MovieSeriesServiceInterface {
@@ -27,15 +29,17 @@ public class MovieSeriesServiceImplementation implements MovieSeriesServiceInter
     private MovieSeriesRepository movieSeriesRepository;
     private MovieSeriesMapper movieSeriesMapper;
     private GenreServiceInterface genreService;
-    private CharacterMapper characterMapper;
     private CharacterServiceInterface characterService;
 
-    public MovieSeriesServiceImplementation(MovieSeriesRepository movieSeriesRepository, MovieSeriesMapper movieSeriesMapper, GenreServiceInterface genreService, CharacterMapper characterMapper, CharacterServiceInterface characterService) {
+    private MovieSeriesSpecification movieSeriesSpecification;
+
+    @Autowired
+    public MovieSeriesServiceImplementation(MovieSeriesRepository movieSeriesRepository, MovieSeriesMapper movieSeriesMapper, GenreServiceInterface genreService, CharacterServiceInterface characterService, MovieSeriesSpecification movieSeriesSpecification) {
         this.movieSeriesRepository = movieSeriesRepository;
         this.movieSeriesMapper = movieSeriesMapper;
         this.genreService = genreService;
-        this.characterMapper = characterMapper;
         this.characterService = characterService;
+        this.movieSeriesSpecification = movieSeriesSpecification;
     }
 
     @Override
@@ -178,5 +182,13 @@ public class MovieSeriesServiceImplementation implements MovieSeriesServiceInter
         }
 
         return responseMovieSeriesDTO;
+    }
+
+    @Override
+    public List<MovieSeriesDTOImageTitleDate> readMoviesSeriesWithFilters(String name, Long genreId, String order) {
+        MovieSeriesFiltersDTO movieSeriesFiltersDTO = new MovieSeriesFiltersDTO(name, genreId, order);
+        List<MovieSeriesEntity> movieSeriesEntityList = movieSeriesRepository.findAll(movieSeriesSpecification.readByFilters(movieSeriesFiltersDTO));
+
+        return movieSeriesMapper.toListMovieSeriesDTOImageTitleDate(movieSeriesEntityList);
     }
 }

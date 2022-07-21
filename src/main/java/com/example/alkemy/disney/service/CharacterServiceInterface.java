@@ -13,5 +13,5 @@ public interface CharacterServiceInterface {
     CharacterDTO updateCharacter(CharacterDTO characterDTO);
     CharacterDTO deleteCharacterById(Long id);
 
-    List<CharacterDTOImageName> readCharactersWithFilters(String name, Integer age, Set<Long> moviesSeries, String order);
+    List<CharacterDTOImageName> readCharactersWithFilters(String name, Integer age, Integer weight, Set<Long> moviesSeries);
 }
