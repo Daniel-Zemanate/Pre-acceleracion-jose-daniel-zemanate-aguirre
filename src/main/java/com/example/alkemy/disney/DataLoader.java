@@ -1,5 +1,7 @@
 package com.example.alkemy.disney;
 
+import com.example.alkemy.disney.configuration.security.model.entity.UserEntity;
+import com.example.alkemy.disney.configuration.security.repository.UserRepository;
 import com.example.alkemy.disney.model.entity.CharacterEntity;
 import com.example.alkemy.disney.model.entity.GenreEntity;
 import com.example.alkemy.disney.model.entity.MovieSeriesEntity;
@@ -22,12 +24,14 @@ public class DataLoader implements ApplicationRunner {
     private MovieSeriesRepository movieSeriesRepository;
     private CharacterRepository characterRepository;
     private GenreRepository genreRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    public DataLoader(MovieSeriesRepository movieSeriesRepository, CharacterRepository characterRepository, GenreRepository genreRepository) {
+    public DataLoader(MovieSeriesRepository movieSeriesRepository, CharacterRepository characterRepository, GenreRepository genreRepository, UserRepository userRepository) {
         this.movieSeriesRepository = movieSeriesRepository;
         this.characterRepository = characterRepository;
         this.genreRepository = genreRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -81,5 +85,10 @@ public class DataLoader implements ApplicationRunner {
 //        movieSeriesEntity2.setCharacters(characterEntitySet);
         movieSeriesEntity2.setGenreId(1L);
         movieSeriesRepository.save(movieSeriesEntity2);
+
+
+        UserEntity userEntity = new UserEntity("user1", "user1");
+        userRepository.save(userEntity);
+
     }
 }
