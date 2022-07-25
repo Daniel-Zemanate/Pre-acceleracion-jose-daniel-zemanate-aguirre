@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -42,15 +43,19 @@ public class AuthenticationService implements UserDetailsService {
 //
 //        authorizations.add(authorization);
 
-        org.springframework.security.core.userdetails.User userDetail = new org.springframework.security.core.userdetails.User(user.get().getUsername(),"{noop}" + user.get().getPassword(),true, true, true,true, Collections.emptyList());
+//        org.springframework.security.core.userdetails.User userDetail = new org.springframework.security.core.userdetails.User(user.get().getUsername(),"{noop}" + user.get().getPassword(),true, true, true,true, Collections.emptyList());
+
+        org.springframework.security.core.userdetails.User userDetail = new org.springframework.security.core.userdetails.User(user.get().getUsername(), user.get().getPassword(),true, true, true,true, Collections.emptyList());
 
         return userDetail;
     }
 
     public void saveUser(UserDTO userDTO){
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(12);
+
         UserEntity userEntity = new UserEntity();
         userEntity.setUsername(userDTO.getUsername());
-        userEntity.setPassword(userDTO.getPassword());
+        userEntity.setPassword(passwordEncoder.encode(userDTO.getPassword()));
 
         userRepository.save(userEntity);
     }

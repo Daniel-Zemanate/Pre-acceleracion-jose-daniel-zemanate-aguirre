@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/genres")
 public class GenreController {
@@ -28,10 +30,11 @@ public class GenreController {
     @PostMapping()
     @ApiOperation("Endpoint to create new genres")
     @ApiResponses({
-            @ApiResponse(code = 201, message = "Genre created successfully"),
+            @ApiResponse(code = 201, message = "Genre successfully created"),
             @ApiResponse(code = 400, message = "Autoincrement ID, no needed")
     })
-    public ResponseEntity<?> create(@RequestBody GenreDTO genreDTO){
+    public ResponseEntity<?> createGenre(@Valid @RequestBody GenreDTO genreDTO){
+
         return new ResponseEntity<>(genreService.createGenre(genreDTO), HttpStatus.CREATED);
     }
 }

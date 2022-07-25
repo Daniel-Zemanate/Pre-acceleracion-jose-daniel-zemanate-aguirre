@@ -18,18 +18,11 @@ import java.util.List;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfiguration {
-//
-//    @Bean
-//    public Docket api() {
-//        return new Docket(DocumentationType.SWAGGER_2)
-//                .select()
-//                .apis(RequestHandlerSelectors.basePackage("com.example.alkAccMoviesDisny.controller"))
-//                .build();
-//    }
 
     private ApiKey apiKey() {
         return new ApiKey("JWT", "Authorization", "header (Bearer)");
     }
+
     private SecurityContext securityContext() {
         return SecurityContext.builder().securityReferences(defaultAuth()).build();
     }
@@ -48,11 +41,7 @@ public class SwaggerConfiguration {
                 .securityContexts(Arrays.asList(securityContext()))
                 .securitySchemes(Arrays.asList(apiKey()))
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.example.alkAccMoviesDisny.controller"))
-//                .apis(RequestHandlerSelectors.any())
-//                .paths(PathSelectors.any())
+                .apis(RequestHandlerSelectors.basePackage("com.example.alkemy.disney"))
                 .build();
     }
-
-
 }
