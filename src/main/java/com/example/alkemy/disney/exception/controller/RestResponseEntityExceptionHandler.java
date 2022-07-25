@@ -7,6 +7,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -29,7 +30,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 
     @ExceptionHandler(value = {MyNotFoundIdException.class})
     protected ResponseEntity<Object> handleNotFoundElement(RuntimeException ex, WebRequest request) {
-        String bodyOfResponse = "NOT FOUND ID: "+ex.getMessage()+", CHECK REQUEST PARAMS";
+        String bodyOfResponse = "NOT FOUND: "+ex.getMessage()+", CHECK REQUEST PARAMS";
         LOGGER.error(bodyOfResponse);
         return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
@@ -48,6 +49,15 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 
+    @ExceptionHandler(value = {MyUniqueControlException.class})
+    protected ResponseEntity<Object> handleUniqueControl(RuntimeException ex, WebRequest request) {
+        String bodyOfResponse = ex.getMessage();
+        LOGGER.error(bodyOfResponse);
+        return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
+
+
+
     // ------------ OVERRIDE METHODS ------------
 
     @Override
@@ -56,7 +66,6 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         MessageException bodyOfResponse = new MessageException(LocalDateTime.now().format(formatter), status.value()+" -> " + status.getReasonPhrase(),  new ArrayList<>());
         bodyOfResponse.getMessage().add("IT IS NECESSARY TO VALIDATE INPUT DATA");
-
 
         for (FieldError fieldError: ex.getBindingResult().getFieldErrors()) {
 
