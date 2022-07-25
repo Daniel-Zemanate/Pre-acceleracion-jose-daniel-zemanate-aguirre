@@ -29,10 +29,10 @@ public class CharacterController {
     @PostMapping()
     @ApiOperation("Endpoint to create new characters")
     @ApiResponses({
-            @ApiResponse(code = 201, message = "Character created successfully"),
-            @ApiResponse(code = 400, message = "Autoincrement ID, no needed")
+            @ApiResponse(code = 201, message = "Character successfully created"),
+            @ApiResponse(code = 400, message = "Wrong request params")
     })
-    public ResponseEntity<?> createCharacter(@RequestBody CharacterDTO characterDTO){
+    public ResponseEntity<?> createCharacter(@Valid @RequestBody CharacterDTO characterDTO){
 
         return new ResponseEntity<>(characterService.createCharacter(characterDTO), HttpStatus.CREATED);
     }
@@ -40,7 +40,7 @@ public class CharacterController {
     @GetMapping("/{id}")
     @ApiOperation("Endpoint to request for specific character details")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "Character read successfully"),
+            @ApiResponse(code = 200, message = "Character successfully read"),
             @ApiResponse(code = 400, message = "Wrong request params"),
             @ApiResponse(code = 404, message = "Search parameter Not found")
     })
@@ -52,11 +52,11 @@ public class CharacterController {
     @PutMapping()
     @ApiOperation("Endpoint to update characters")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "Character updated successfully"),
-            @ApiResponse(code = 400, message = "Null id or ID type is not Long"),
+            @ApiResponse(code = 200, message = "Character successfully updated"),
+            @ApiResponse(code = 400, message = "Wrong request params"),
             @ApiResponse(code = 404, message = "Search parameter Not found")
     })
-    public ResponseEntity<?> updateCharacter(@RequestBody CharacterDTO characterDTO){
+    public ResponseEntity<?> updateCharacter(@Valid @RequestBody CharacterDTO characterDTO){
 
         return new ResponseEntity<>(characterService.updateCharacter(characterDTO), HttpStatus.OK);
     }
@@ -64,7 +64,7 @@ public class CharacterController {
     @DeleteMapping("/{id}")
     @ApiOperation("Endpoint to delete a specific character")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "Character deleted successfully"),
+            @ApiResponse(code = 200, message = "Character successfully deleted"),
             @ApiResponse(code = 400, message = "Wrong request params"),
             @ApiResponse(code = 404, message = "Search parameter Not found")
     })
@@ -76,7 +76,7 @@ public class CharacterController {
     @GetMapping
     @ApiOperation("Endpoint to request a list of characters with image and name properties. Filters like name, age, weight and movies participation could be applied")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "List of characters read successfully")
+            @ApiResponse(code = 200, message = "List of characters successfully read")
     })
     public ResponseEntity<?> readCharactersWithFilters(
             @RequestParam(required = false) String name,

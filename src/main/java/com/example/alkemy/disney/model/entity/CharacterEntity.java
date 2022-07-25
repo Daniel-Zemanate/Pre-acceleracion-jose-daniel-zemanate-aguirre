@@ -34,12 +34,10 @@ public class CharacterEntity {
     @Column(name = "weight")
     private Integer weight;
 
-    @Column(name = "history")
-    private String history;
+    @Column(name = "story")
+    private String story;
 
     @ManyToMany(mappedBy = "characters")
     @JsonManagedReference
     private List<MovieSeriesEntity> movieSeriesList;
-//
-//    private Set<CharacterMovieSeriesEntity> characterMovieSeries = new HashSet<>();
 }

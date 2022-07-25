@@ -11,6 +11,7 @@ import com.example.alkemy.disney.repository.MovieSeriesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -47,21 +48,21 @@ public class DataLoader implements ApplicationRunner {
         characterEntity.setName("name1");
         characterEntity.setAge(1);
         characterEntity.setWeight(1);
-        characterEntity.setHistory("history1");
+        characterEntity.setStory("history1");
         characterRepository.save(characterEntity);
         CharacterEntity characterEntity2 = new CharacterEntity();
         characterEntity2.setImage("image2");
         characterEntity2.setName("name2");
         characterEntity2.setAge(2);
         characterEntity2.setWeight(2);
-        characterEntity2.setHistory("history2");
+        characterEntity2.setStory("history2");
         characterRepository.save(characterEntity2);
         CharacterEntity characterEntity3 = new CharacterEntity();
         characterEntity3.setImage("image3");
         characterEntity3.setName("name3");
         characterEntity3.setAge(3);
         characterEntity3.setWeight(3);
-        characterEntity3.setHistory("history3");
+        characterEntity3.setStory("history3");
         characterRepository.save(characterEntity3);
 
         MovieSeriesEntity movieSeriesEntity = new MovieSeriesEntity();
@@ -87,7 +88,9 @@ public class DataLoader implements ApplicationRunner {
         movieSeriesRepository.save(movieSeriesEntity2);
 
 
-        UserEntity userEntity = new UserEntity("user1", "user1");
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
+        String password = encoder.encode("user1");
+        UserEntity userEntity = new UserEntity("user1", password);
         userRepository.save(userEntity);
 
     }

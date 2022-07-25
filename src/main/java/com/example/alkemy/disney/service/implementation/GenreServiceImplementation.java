@@ -31,7 +31,8 @@ public class GenreServiceImplementation implements GenreServiceInterface {
 
         //VALIDATION: AUTOINCREMENT ID. NO NEEDED.
         if (genreDTO.getIdGenre() != null){
-            throw new MyCreationWithIdException("Something went wrong when createGenre in -GenreServiceImplementation-");
+
+            throw new MyEntityIdControlException("Trying to create a genre with id= "+ genreDTO.getIdGenre() +" included");
         }
 
         return genreMapper.toGenreDTO(genreRepository.save(genreMapper.toGenreEntity(genreDTO)));
@@ -48,14 +49,14 @@ public class GenreServiceImplementation implements GenreServiceInterface {
     public GenreEntity readGenreEntityById(Long id) {
         if (id == null){
 
-            throw new MyNoIdGenreException("Something went wrong when readGenreEntityById in -GenreServiceImplementation-");
+            throw new MyEntityIdControlException("Trying to find a genre with id= "+ id);
         }
 
         Optional<GenreEntity> genreEntity = genreRepository.findById(id);
 
         if (!genreEntity.isPresent()){
 
-            throw new MyNotFoundGenreEntityException("Something went wrong when readGenreEntityById: "+id+" in -GenreServiceImplementation-");
+            throw new MyNotFoundIdException("can not find any genre with id= "+ id);
         }
 
         return genreEntity.get();

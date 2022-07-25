@@ -12,24 +12,12 @@ import java.util.List;
 import java.util.Set;
 
 
-//    private Long idCharacter;
-//    private String image;
-//    private String name;
-//    private Integer age;
-//    private Integer weight;
-//    private String history;
-//    private List<MovieSeriesDTO> movieSeriesDTOList;
-
 @Component
 public class CharacterMapper {
 
     @Autowired
     private MovieSeriesMapper movieSeriesMapper;
 
-//    @Autowired
-//    public CharacterMapper(MovieSeriesMapper movieSeriesMapper) {
-//        this.movieSeriesMapper = movieSeriesMapper;
-//    }
 
     //-------------- FROM DTO TO ENTITY --------------
 
@@ -41,7 +29,7 @@ public class CharacterMapper {
         characterEntity.setName(dto.getName());
         characterEntity.setAge(dto.getAge());
         characterEntity.setWeight(dto.getWeight());
-        characterEntity.setHistory(dto.getHistory());
+        characterEntity.setStory(dto.getStory());
 
         return characterEntity;
     }
@@ -69,7 +57,7 @@ public class CharacterMapper {
         characterDTO.setName(entity.getName());
         characterDTO.setAge(entity.getAge());
         characterDTO.setWeight(entity.getWeight());
-        characterDTO.setHistory(entity.getHistory());
+        characterDTO.setStory(entity.getStory());
         if (loadMovieSeriesList){
 
             characterDTO.setMovieSeriesList(movieSeriesMapper.toListMovieSeriesDTO(entity.getMovieSeriesList()));
@@ -95,7 +83,6 @@ public class CharacterMapper {
 
     public List<CharacterDTOImageName> toListCharacterDTOImageName(List<CharacterEntity> entityList){
         List<CharacterDTOImageName> characterDTOImageNameList = new ArrayList<>();
-//        CharacterDTOImageName characterDTOImageName = new CharacterDTOImageName();
 
         for (CharacterEntity characterEntity: entityList) {
             CharacterDTOImageName characterDTOImageName = new CharacterDTOImageName();

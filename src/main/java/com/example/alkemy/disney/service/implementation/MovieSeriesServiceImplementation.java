@@ -1,17 +1,13 @@
 package com.example.alkemy.disney.service.implementation;
 
-import com.example.alkemy.disney.exception.MyCreationWithIdException;
-import com.example.alkemy.disney.exception.MyNoIdUpdateException;
-import com.example.alkemy.disney.exception.MyNoNeedCharactersException;
+import com.example.alkemy.disney.exception.MyEntityIdControlException;
 import com.example.alkemy.disney.exception.MyNotFoundIdException;
 import com.example.alkemy.disney.model.dto.CharacterDTO;
 import com.example.alkemy.disney.model.dto.MovieSeriesDTO;
 import com.example.alkemy.disney.model.dto.MovieSeriesDTOImageTitleDate;
 import com.example.alkemy.disney.model.dto.MovieSeriesFiltersDTO;
-import com.example.alkemy.disney.model.entity.CharacterEntity;
 import com.example.alkemy.disney.model.entity.GenreEntity;
 import com.example.alkemy.disney.model.entity.MovieSeriesEntity;
-import com.example.alkemy.disney.model.mapper.CharacterMapper;
 import com.example.alkemy.disney.model.mapper.MovieSeriesMapper;
 import com.example.alkemy.disney.repository.MovieSeriesRepository;
 import com.example.alkemy.disney.repository.specification.MovieSeriesSpecification;
@@ -46,7 +42,8 @@ public class MovieSeriesServiceImplementation implements MovieSeriesServiceInter
     public MovieSeriesDTO createMovieSeries(MovieSeriesDTO movieSeriesDTO, Boolean isAnUpdate) {
         //VALIDATION: AUTOINCREMENT ID. NO NEEDED.
         if (movieSeriesDTO.getIdMovieSeries() != null && !isAnUpdate){
-            throw new MyCreationWithIdException("Something went wrong when createMovieSeries in -MovieSeriesServiceImplementation-");
+
+            throw new MyEntityIdControlException("Trying to create a movie/series with id= "+ movieSeriesDTO.getIdMovieSeries() +" included");
         }
 
         GenreEntity genreEntity = genreService.readGenreEntityById(movieSeriesDTO.getGenreId());
@@ -56,12 +53,20 @@ public class MovieSeriesServiceImplementation implements MovieSeriesServiceInter
 
         //-------------
         if (!isAnUpdate){
+            List<Long> idCharactersCheck = new ArrayList<>();
+
             for (CharacterDTO characterDTO : movieSeriesDTO.getCharacters()) {
                 if (characterDTO.getIdCharacter() != null){
 
-                    throw new MyCreationWithIdException("Something went wrong when verifying characters id in createMovieSeries in -MovieSeriesServiceImplementation-");
+                    idCharactersCheck.add(characterDTO.getIdCharacter());
                 }
             }
+
+            if (!idCharactersCheck.isEmpty()){
+
+                throw new MyEntityIdControlException("Trying to create a character with id= "+ idCharactersCheck +" included");
+            }
+
         }else {
             //CLEANING OLD RECORDS
             movieSeriesEntity = movieSeriesMapper.toMovieSeriesEntity(movieSeriesDTO, false);
@@ -85,7 +90,7 @@ public class MovieSeriesServiceImplementation implements MovieSeriesServiceInter
 
         if (!entityCheck.isPresent()){
 
-            throw new MyNotFoundIdException("Something went wrong when readMovieSeriesById: "+id+" in -MovieSeriesServiceImplementation-");
+            throw new MyNotFoundIdException("can not find any movie/series with id= "+ id);
         }
 
         MovieSeriesDTO responseMovieSeriesDTO = movieSeriesMapper.toMovieSeriesDTO(entityCheck.get(), true);
@@ -97,7 +102,7 @@ public class MovieSeriesServiceImplementation implements MovieSeriesServiceInter
     public MovieSeriesDTO updateMovieSeries(MovieSeriesDTO movieSeriesDTO) {
         if (movieSeriesDTO.getIdMovieSeries() == null){
 
-            throw new MyNoIdUpdateException("Something went wrong when updateMovieSeries in -MovieSeriesServiceImplementation-");
+            throw new MyEntityIdControlException("Trying to update a character with id= "+ movieSeriesDTO.getIdMovieSeries());
         }
         //VALIDATION: ID EXISTS.
         MovieSeriesDTO movieSeriesDTOUpdate = readMovieSeriesById(movieSeriesDTO.getIdMovieSeries());
@@ -109,23 +114,8 @@ public class MovieSeriesServiceImplementation implements MovieSeriesServiceInter
         movieSeriesDTOUpdate.setGenreId(movieSeriesDTO.getGenreId());
 
         if (movieSeriesDTO.getCharacters().size() != 0){
-            if (movieSeriesDTOUpdate.getCharacters().size() == movieSeriesDTO.getCharacters().size()){
-                int comparison = 0;
 
-                for (CharacterDTO characterDTO : movieSeriesDTO.getCharacters()) {
-                    if (movieSeriesDTOUpdate.getCharacters().contains(characterDTO)){
-                        comparison++;
-                    }
-                }
-
-                if (comparison != movieSeriesDTOUpdate.getCharacters().size()){
-
-                    throw new MyNoNeedCharactersException("Something went wrong when updateMovieSeries in -MovieSeriesServiceImplementation-");
-                }
-            }else {
-
-                throw new MyNoNeedCharactersException("Something went wrong when updateMovieSeries in -MovieSeriesServiceImplementation-");
-            }
+            throw new MyEntityIdControlException("Only movie/series properties are allowed to be update, list of characters are not allowed");
         }
 
         return createMovieSeries(movieSeriesDTOUpdate, true);

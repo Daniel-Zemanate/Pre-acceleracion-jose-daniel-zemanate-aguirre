@@ -1,7 +1,6 @@
 package com.example.alkemy.disney.service.implementation;
 
-import com.example.alkemy.disney.exception.MyCreationWithIdException;
-import com.example.alkemy.disney.exception.MyNoIdUpdateException;
+import com.example.alkemy.disney.exception.MyEntityIdControlException;
 import com.example.alkemy.disney.exception.MyNotFoundIdException;
 import com.example.alkemy.disney.model.dto.CharacterDTO;
 import com.example.alkemy.disney.model.dto.CharacterDTOImageName;
@@ -14,7 +13,6 @@ import com.example.alkemy.disney.service.CharacterServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -38,7 +36,7 @@ public class CharacterServiceImplementation implements CharacterServiceInterface
         //VALIDATION: AUTOINCREMENT ID. NO NEEDED.
         if (characterDTO.getIdCharacter() != null){
 
-            throw new MyCreationWithIdException("Something went wrong when createCharacter in -CharacterServiceImplementation-");
+            throw new MyEntityIdControlException("Trying to create a character with id= "+ characterDTO.getIdCharacter() +" included");
         }
 
         CharacterDTO responseCharacterDTO = characterMapper.toCharacterDTO(characterRepository.save(characterMapper.toCharacterEntity(characterDTO)), true);
@@ -53,7 +51,7 @@ public class CharacterServiceImplementation implements CharacterServiceInterface
 
         if (!entityCheck.isPresent()){
 
-            throw new MyNotFoundIdException("Something went wrong when readCharacterById: "+id+" in -CharacterServiceImplementation-");
+            throw new MyNotFoundIdException("can not find any character with id= "+ id);
         }
 
         responseCharacterDTO = characterMapper.toCharacterDTO(entityCheck.get(),true);
@@ -65,7 +63,7 @@ public class CharacterServiceImplementation implements CharacterServiceInterface
     public CharacterDTO updateCharacter(CharacterDTO characterDTO) {
         if (characterDTO.getIdCharacter() == null){
 
-            throw new MyNoIdUpdateException("Something went wrong when updateCharacter in -CharacterServiceImplementation-");
+            throw new MyEntityIdControlException("Trying to update a character with id= "+ characterDTO.getIdCharacter());
         }
 
         //VALIDATION: ID EXISTS.

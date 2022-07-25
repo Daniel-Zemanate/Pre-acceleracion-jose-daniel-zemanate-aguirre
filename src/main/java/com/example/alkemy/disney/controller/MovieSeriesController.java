@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/movies")
 public class MovieSeriesController {
@@ -24,11 +26,11 @@ public class MovieSeriesController {
     @PostMapping()
     @ApiOperation("Endpoint to create new movies/series")
     @ApiResponses({
-            @ApiResponse(code = 201, message = "Movie/Series created successfully"),
-            @ApiResponse(code = 400, message = "Autoincrement ID, no needed / Null genre id"),
+            @ApiResponse(code = 201, message = "Movie/Series successfully created"),
+            @ApiResponse(code = 400, message = "Wrong request params"),
             @ApiResponse(code = 404, message = "Input genre id not found")
     })
-    public ResponseEntity<?> createMovieSeries(@RequestBody MovieSeriesDTO movieSeriesDTO){
+    public ResponseEntity<?> createMovieSeries(@Valid @RequestBody MovieSeriesDTO movieSeriesDTO){
 
         return new ResponseEntity<>(movieSeriesService.createMovieSeries(movieSeriesDTO, false), HttpStatus.CREATED);
     }
@@ -36,7 +38,7 @@ public class MovieSeriesController {
     @GetMapping("/{id}")
     @ApiOperation("Endpoint to request for specific movie/serie details")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "Character read successfully"),
+            @ApiResponse(code = 200, message = "Character successfully read"),
             @ApiResponse(code = 400, message = "Wrong request params"),
             @ApiResponse(code = 404, message = "Search parameter Not found")
     })
@@ -47,11 +49,11 @@ public class MovieSeriesController {
     @PutMapping()
     @ApiOperation("Endpoint to update movies/series")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "Movie/Series updated successfully"),
-            @ApiResponse(code = 400, message = "Null id or ID type is not Long"),
+            @ApiResponse(code = 200, message = "Movie/Series successfully updated"),
+            @ApiResponse(code = 400, message = "Wrong request params"),
             @ApiResponse(code = 404, message = "Search parameter Not found")
     })
-    public ResponseEntity<?> updateMovieSeries(@RequestBody MovieSeriesDTO movieSeriesDTO){
+    public ResponseEntity<?> updateMovieSeries(@Valid @RequestBody MovieSeriesDTO movieSeriesDTO){
 
         return new ResponseEntity<>(movieSeriesService.updateMovieSeries(movieSeriesDTO), HttpStatus.OK);
     }
@@ -59,7 +61,7 @@ public class MovieSeriesController {
     @DeleteMapping("/{id}")
     @ApiOperation("Endpoint to delete a specific movie/series")
     @ApiResponses({
-        @ApiResponse(code = 200, message = "Movie/Series deleted successfully"),
+        @ApiResponse(code = 200, message = "Movie/Series successfully deleted"),
         @ApiResponse(code = 400, message = "Wrong request params"),
         @ApiResponse(code = 404, message = "Search parameter Not found")
     })
@@ -98,7 +100,7 @@ public class MovieSeriesController {
     @GetMapping
     @ApiOperation("Endpoint to request a list of movies with image, title and date properties. Filters like name, genre and order could be applied")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "List of movies read successfully")
+            @ApiResponse(code = 200, message = "List of movies successfully read")
     })
     public ResponseEntity<?> readMoviesSeriesWithFilters(
             @RequestParam(required = false) String name,
