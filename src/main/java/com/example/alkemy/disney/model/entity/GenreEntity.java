@@ -2,6 +2,8 @@ package com.example.alkemy.disney.model.entity;
 
 
 import lombok.*;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 
@@ -12,6 +14,8 @@ import javax.persistence.*;
 @ToString
 @EqualsAndHashCode
 @Entity
+@SQLDelete(sql = "UPDATE genre SET deleted = true WHERE id_genre = ?")
+@Where(clause = "deleted = false")
 @Table(name = "genre")
 public class GenreEntity {
 
@@ -26,6 +30,9 @@ public class GenreEntity {
 
     @Column(name = "image")
     private String image;
+
+    @Column(name = "deleted")
+    private Boolean deleted = Boolean.FALSE;
 
 //    @OneToMany(mappedBy = "genre")
 //    @JsonIgnore

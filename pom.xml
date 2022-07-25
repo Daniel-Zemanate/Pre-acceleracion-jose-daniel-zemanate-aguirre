@@ -103,7 +103,11 @@
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>com.sendgrid</groupId>
+            <artifactId>sendgrid-java</artifactId>
+        </dependency>
+    </dependencies>
 
 	<build>
 		<plugins>

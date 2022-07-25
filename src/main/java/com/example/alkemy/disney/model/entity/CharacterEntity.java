@@ -3,6 +3,8 @@ package com.example.alkemy.disney.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.List;
@@ -14,6 +16,8 @@ import java.util.List;
 @ToString
 @EqualsAndHashCode
 @Entity
+@SQLDelete(sql = "UPDATE character SET deleted = true WHERE id_character = ?")
+@Where(clause = "deleted = false")
 @Table(name = "character")
 public class CharacterEntity {
     @Id
@@ -36,6 +40,9 @@ public class CharacterEntity {
 
     @Column(name = "story")
     private String story;
+
+    @Column(name = "deleted")
+    private Boolean deleted = Boolean.FALSE;
 
     @ManyToMany(mappedBy = "characters")
     @JsonManagedReference
