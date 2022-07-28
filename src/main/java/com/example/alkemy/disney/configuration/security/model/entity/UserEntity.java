@@ -26,15 +26,6 @@ public class UserEntity {
     @Column(name = "password", nullable = false)
     private String password;
 
-//    @Enumerated(EnumType.STRING)
-//    private Role role;
-//
-//    public UserEntity(String username, String password, Role role) {
-//        this.username = username;
-//        this.password = password;
-//        this.role = role;
-//    }
-
 
     public UserEntity(String username, String password) {
         this.username = username;

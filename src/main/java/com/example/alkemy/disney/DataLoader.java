@@ -11,13 +11,10 @@ import com.example.alkemy.disney.repository.MovieSeriesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 @Component
 public class DataLoader implements ApplicationRunner {
@@ -26,14 +23,24 @@ public class DataLoader implements ApplicationRunner {
     private CharacterRepository characterRepository;
     private GenreRepository genreRepository;
     private UserRepository userRepository;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public DataLoader(MovieSeriesRepository movieSeriesRepository, CharacterRepository characterRepository, GenreRepository genreRepository, UserRepository userRepository) {
+    public DataLoader(MovieSeriesRepository movieSeriesRepository, CharacterRepository characterRepository, GenreRepository genreRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.movieSeriesRepository = movieSeriesRepository;
         this.characterRepository = characterRepository;
         this.genreRepository = genreRepository;
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
+
+//    @Autowired
+//    public DataLoader(MovieSeriesRepository movieSeriesRepository, CharacterRepository characterRepository, GenreRepository genreRepository, UserRepository userRepository) {
+//        this.movieSeriesRepository = movieSeriesRepository;
+//        this.characterRepository = characterRepository;
+//        this.genreRepository = genreRepository;
+//        this.userRepository = userRepository;
+//    }
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -88,8 +95,8 @@ public class DataLoader implements ApplicationRunner {
         movieSeriesRepository.save(movieSeriesEntity2);
 
 
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
-        String password = encoder.encode("user1");
+//        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
+        String password = passwordEncoder.encode("user1");
         UserEntity userEntity = new UserEntity("user1", password);
         userRepository.save(userEntity);
 

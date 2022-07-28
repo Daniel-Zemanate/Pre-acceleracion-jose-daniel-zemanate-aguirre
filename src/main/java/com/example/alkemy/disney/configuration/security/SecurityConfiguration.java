@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
@@ -26,9 +27,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtRequestFilter jwtRequestFilter;
 
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Bean
+    public PasswordEncoder passwordEncoder() {
 
+        return new BCryptPasswordEncoder();
+    }
 
 
     //WHITE LIST TO GRANT FULL ACCESS TO NECESSARY ENDPOINTS
@@ -56,16 +59,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable().authorizeRequests()
                 .antMatchers(AUTH_WHITELIST).permitAll()
-
-                //-------- HERE OTHERS antMatchers --------
-
-//                .and()
-//                .authorizeRequests()
-//                .antMatchers().hasRole("ADMIN")
-//                .antMatchers().hasAnyRole("USER", "ADMIN")
-
-                //-------- HERE OTHERS antMatchers --------
-
                 .anyRequest().authenticated()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
@@ -75,12 +68,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
-
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(authenticationService);
-//    }
-//
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
@@ -95,9 +82,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
     @Bean
-    public DaoAuthenticationProvider daoAuthenticationProvider(){
+    public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setPasswordEncoder(bCryptPasswordEncoder);
+        provider.setPasswordEncoder(passwordEncoder());
         provider.setUserDetailsService(authenticationService);
         return provider;
     }
