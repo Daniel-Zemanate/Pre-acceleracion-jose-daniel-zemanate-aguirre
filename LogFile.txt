@@ -167,3 +167,24 @@
 [2022-07-25 17:12:05] [ERROR] [CharacterServiceImplementation:34] NOT FOUND ID: Not found by username, CHECK REQUEST PARAMS
 [2022-07-25 17:13:20] [ERROR] [CharacterServiceImplementation:34] NOT FOUND: Not found by username, CHECK REQUEST PARAMS
 [2022-07-25 17:13:49] [ERROR] [CharacterServiceImplementation:34] NOT FOUND: can not find any character with id= 100, CHECK REQUEST PARAMS
+[2022-07-25 17:27:38] [ERROR] [CharacterServiceImplementation:34] NOT FOUND: can not find any username= "user" , CHECK REQUEST PARAMS
+[2022-07-25 17:27:57] [ERROR] [CharacterServiceImplementation:34] NOT FOUND: can not find any username= "1" , CHECK REQUEST PARAMS
+[2022-07-25 17:28:47] [ERROR] [CharacterServiceImplementation:79] MessageException(date=2022-07-25 17:28:47, status=400 -> Bad Request, message=[IT IS NECESSARY TO VALIDATE INPUT DATA, username: Must be a valid email; e.g: validemail@domain.com.co; e.g: rightemail@domain.com])
+[2022-07-25 17:29:14] [ERROR] [CharacterServiceImplementation:79] MessageException(date=2022-07-25 17:29:14, status=400 -> Bad Request, message=[IT IS NECESSARY TO VALIDATE INPUT DATA, password: Rules; 1 Uppercase letter (A); 1 Symbol (! " # $ % & ' ( ) * +); 1 Lowercase letter (z); 1 digit (0-9); minimum length of 8 characters, username: Must be a valid email; e.g: validemail@domain.com.co; e.g: rightemail@domain.com])
+[2022-07-25 17:29:52] [ERROR] [CharacterServiceImplementation:34] NOT FOUND: can not find any username= "use" , CHECK REQUEST PARAMS
+[2022-07-25 17:30:31] [INFO ] [GenreServiceImplementation:30] Executing genre creation in class: GenreServiceImplementation
+[2022-07-25 17:30:49] [INFO ] [GenreServiceImplementation:30] Executing genre creation in class: GenreServiceImplementation
+[2022-07-25 17:30:49] [ERROR] [CharacterServiceImplementation:48] Trying to create a genre with id= 1 included
+[2022-07-25 17:31:16] [ERROR] [CharacterServiceImplementation:79] MessageException(date=2022-07-25 17:31:16, status=400 -> Bad Request, message=[IT IS NECESSARY TO VALIDATE INPUT DATA, name: genre must have some name])
+[2022-07-25 17:32:00] [ERROR] [CharacterServiceImplementation:96] WRONG TYPE INPUT PARAM: Unrecognized token 'a': was expecting (JSON String, Number, Array, Object or token 'null', 'true' or 'false')
+ at [Source: (org.springframework.util.StreamUtils$NonClosingInputStream)
+[2022-07-25 17:33:02] [ERROR] [CharacterServiceImplementation:79] MessageException(date=2022-07-25 17:33:02, status=400 -> Bad Request, message=[IT IS NECESSARY TO VALIDATE INPUT DATA, age: character age must be a positive number of years, image: character image must not be null, story: character must have some story, name: character must have some name, weight: character weight must be a positive number of kilograms])
+[2022-07-25 17:34:01] [ERROR] [CharacterServiceImplementation:34] NOT FOUND: can not find any character with id= 10000, CHECK REQUEST PARAMS
+[2022-07-25 17:34:29] [ERROR] [CharacterServiceImplementation:34] NOT FOUND: can not find any character with id= 1000, CHECK REQUEST PARAMS
+[2022-07-25 17:34:56] [ERROR] [CharacterServiceImplementation:79] MessageException(date=2022-07-25 17:34:56, status=400 -> Bad Request, message=[IT IS NECESSARY TO VALIDATE INPUT DATA, age: character age must be a positive number of years, name: character must have some name, weight: character weight must be a positive number of kilograms])
+[2022-07-25 17:35:31] [ERROR] [CharacterServiceImplementation:34] NOT FOUND: can not find any character with id= 10999, CHECK REQUEST PARAMS
+[2022-07-25 17:36:53] [ERROR] [CharacterServiceImplementation:48] Trying to create a movie/series with id= 2 included
+[2022-07-25 17:37:29] [ERROR] [CharacterServiceImplementation:79] MessageException(date=2022-07-25 17:37:29, status=400 -> Bad Request, message=[IT IS NECESSARY TO VALIDATE INPUT DATA, grade: movie/ series grade must be a positive number, title: movie/ series must have some title, image: movie/ series image must not be null])
+[2022-07-25 17:38:01] [ERROR] [CharacterServiceImplementation:34] NOT FOUND: can not find any movie/series with id= 19999, CHECK REQUEST PARAMS
+[2022-07-27 20:30:18] [ERROR] [CharacterServiceImplementation:79] MessageException(date=2022-07-27 20:30:18, status=400 -> Bad Request, message=[IT IS NECESSARY TO VALIDATE INPUT DATA, username: username must be a valid email, username: Must be a valid email; e.g: validemail@domain.com.co; e.g: rightemail@domain.com])
+[2022-07-27 20:31:02] [INFO ] [GenreServiceImplementation:30] Executing genre creation in class: GenreServiceImplementation
